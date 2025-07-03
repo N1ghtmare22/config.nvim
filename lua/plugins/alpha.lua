@@ -22,9 +22,10 @@ return {
 		}
 
 		dashboard.section.buttons.val = {
-			dashboard.button("f", "α  >   Find files", ":Telescope fd<CR>"),
-			dashboard.button("n", "Σ  >   Live Grep", ":Telescope live_grep<CR>"),
-			dashboard.button("h", "λ  >   Search for help", ":Telescope help_tags<CR>"),
+			dashboard.button("e", "α  >   New File", ":ene <bar> startinsert<CR>"),
+			dashboard.button("f", "λ  >   Find files", ":Telescope fd<CR>"),
+			dashboard.button("n", "ζ  >   Live Grep", ":Telescope live_grep<CR>"),
+			dashboard.button("h", "Σ  >   Search for help", ":Telescope help_tags<CR>"),
 			dashboard.button("r", "Δ  >   Recent", ":Telescope oldfiles<CR>"),
 		}
 

@@ -29,7 +29,7 @@ return {
 		end, { desc = "Live grep e open files" })
 
 		map("n", "<leader>sn", function()
-			telescope.find_files({ cwd = vim.stdpath("config") })
+			telescope.find_files({ cwd = vim.fn.stdpath("config") })
 		end, { desc = "Search config files" })
 	end,
 }
