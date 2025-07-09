@@ -37,18 +37,6 @@ vim.api.nvim_create_user_command("Floaterm", function()
 	if not vim.api.nvim_win_is_valid(state.floating.win) then
 		state.floating = create_floating_window({ buf = state.floating.buf })
 		if vim.bo[state.floating.buf].buftype ~= "terminal" then
-			-- get os name and change shell
-			if require("utils.os").get_os() == "windows" then
-				if vim.fn.executable("pwsh") then
-					vim.o.shell = "pwsh"
-				elseif vim.fn.executable("powershell") then
-					vim.o.shell = "powershell"
-				else
-					vim.o.shell = "cmd"
-				end
-			else
-				vim.cmd.shell = os.getenv("SHELL")
-			end
 			vim.cmd.terminal()
 		end
 	else

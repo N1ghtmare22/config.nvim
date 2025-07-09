@@ -26,7 +26,7 @@ return {
 				grep_open_files = true,
 				prompt_title = "live grep in open files",
 			})
-		end, { desc = "Live grep e open files" })
+		end, { desc = "Live grep in open files" })
 
 		map("n", "<leader>sn", function()
 			telescope.find_files({ cwd = vim.fn.stdpath("config") })

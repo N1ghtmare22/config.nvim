@@ -24,3 +24,4 @@ vim.opt.termguicolors = true
 vim.o.guicursor = "i-ci-sm:block"
 
 vim.o.shell = "pwsh"
+vim.o.shellcmdflag = "-NoLogo"

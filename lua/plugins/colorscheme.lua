@@ -1,4 +1,4 @@
-return {
+local colorscheme = {
 	{
 		"vague2k/vague.nvim",
 		lazy = false,
@@ -15,6 +15,10 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		priority = 1000,
-		opts = {},
+		opts = {
+			transparent = true,
+		},
 	},
 }
+
+return colorscheme
