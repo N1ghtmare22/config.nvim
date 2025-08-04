@@ -33,7 +33,10 @@ return {
 	---@type blink.cmp.Config
 	opts = {
 		snippets = { preset = "luasnip" },
-		keymap = { preset = "default" },
+		keymap = {
+			preset = "default",
+			["<Tab>"] = { "select_and_accept", "fallback" },
+		},
 		appearance = {
 			nerd_font_variant = "mono",
 		},
