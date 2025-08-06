@@ -1,3 +1,4 @@
+-- Welcome to y config <(-_*)>
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
