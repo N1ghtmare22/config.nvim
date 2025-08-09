@@ -8,9 +8,9 @@ vim.o.cmdheight = 0
 vim.o.mouse = "a"
 
 vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.softtabstop = 4
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.softtabstop = 2
 
 vim.o.scrolloff = 10
 vim.o.signcolumn = "yes"

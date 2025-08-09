@@ -114,6 +114,7 @@ return {
 
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		local servers = {
+			jdtls = {},
 			clangd = {},
 			gopls = {},
 			pyright = {},
@@ -136,6 +137,7 @@ return {
 
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
+			"clang-format",
 			"stylua", -- Used to format Lua code
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

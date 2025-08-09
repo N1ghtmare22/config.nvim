@@ -4,40 +4,23 @@ return {
 	priority = 1000,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-		-- Eviline config for lualine
-		-- Author: shadmansaleh
-		-- Credit: glepnir
 		local lualine = require("lualine")
 
--- Color table for highlights
--- stylua: ignore
---local colors = {
-  --bg       = '#202328',
- -- bg       = '#000000',
-  --fg       = '#bbc2cf',
-  --yellow   = '#ECBE7B',
-  --cyan     = '#008080',
-  --darkblue = '#081633',
-  --green    = '#98be65',
-  --orange   = '#FF8800',
-  --violet   = '#a9a1e1',
-  --magenta  = '#c678dd',
-  --blue     = '#51afef',
-  --red      = '#ec5f67',
---}
-  local colors = {
-    bg       = '#000000',
-    fg       = '#c0caf5',
-    yellow   = '#e0af68',
-    cyan     = '#7dcfff',
-    darkblue = '#1a1b26',
-    green    = '#9ece6a',
-    orange   = '#ff9e64',
-    violet   = '#9d7cd8',
-    magenta  = '#bb9af7',
-    blue     = '#7aa2f7',
-    red      = '#f7768e',
-  }
+		-- Paleta de cores inspirada no vague.nvim
+		local colors = {
+			bg = "#000000",
+			fg = "#c0caf5",
+			keyword = "#7dcfff",
+			plus = "#9ece6a",
+			func = "#bb9af7",
+			string = "#e0af68",
+			operator = "#7aa2f7",
+			constant = "#ff9e64",
+			error = "#f7768e",
+			hint = "#2ac3de",
+			warning = "#e0af68",
+			parameter = "#9d7cd8",
+		}
 
 		local conditions = {
 			buffer_not_empty = function()
@@ -53,32 +36,24 @@ return {
 			end,
 		}
 
-		-- Config
 		local config = {
 			options = {
-				-- Disable sections and component separators
 				component_separators = "",
 				section_separators = "",
 				theme = {
-					-- We are going to use lualine_c an lualine_x as left and
-					-- right section. Both are highlighted by c theme .  So we
-					-- are just setting default looks o statusline
 					normal = { c = { fg = colors.fg, bg = colors.bg } },
 					inactive = { c = { fg = colors.fg, bg = colors.bg } },
 				},
 			},
 			sections = {
-				-- these are to remove the defaults
 				lualine_a = {},
 				lualine_b = {},
 				lualine_y = {},
 				lualine_z = {},
-				-- These will be filled later
 				lualine_c = {},
 				lualine_x = {},
 			},
 			inactive_sections = {
-				-- these are to remove the defaults
 				lualine_a = {},
 				lualine_b = {},
 				lualine_y = {},
@@ -88,97 +63,84 @@ return {
 			},
 		}
 
-		-- Inserts a component in lualine_c at left section
 		local function ins_left(component)
 			table.insert(config.sections.lualine_c, component)
 		end
 
-		-- Inserts a component in lualine_x at right section
 		local function ins_right(component)
 			table.insert(config.sections.lualine_x, component)
 		end
 
-		--ins_left({
-		--function()
-		--return "▊"
-		--end,
-		--color = { fg = colors.blue }, -- Sets highlighting of component
-		--padding = { left = 0, right = 1 }, -- We don't need space before this
-		--})
-
+		-- Indicador de modo: só a cor muda
 		ins_left({
-			-- mode component
 			function()
 				return "▊"
-				--return ""
 			end,
 			color = function()
-				-- auto change color according to neovims mode
 				local mode_color = {
-					n = colors.red,
-					i = colors.green,
-					v = colors.violet,
-					[""] = colors.blue,
-					V = colors.violet,
-					--c = colors.magenta,
-					c = colors.red,
-					no = colors.red,
-					s = colors.orange,
-					S = colors.orange,
-					[""] = colors.orange,
-					ic = colors.yellow,
-					R = colors.red,
-					Rv = colors.blue,
-					cv = colors.red,
-					ce = colors.red,
-					r = colors.cyan,
-					rm = colors.cyan,
-					["r?"] = colors.cyan,
-					["!"] = colors.red,
-					t = colors.red,
+					n = colors.error,
+					i = colors.plus,
+					v = colors.func,
+					[""] = colors.string,
+					V = colors.operator,
+					c = colors.constant,
+					no = colors.keyword,
+					s = colors.string,
+					S = colors.string,
+					[""] = colors.string,
+					ic = colors.plus,
+					R = colors.error,
+					Rv = colors.error,
+					cv = colors.constant,
+					ce = colors.constant,
+					r = colors.hint,
+					rm = colors.hint,
+					["r?"] = colors.hint,
+					["!"] = colors.warning,
+					t = colors.parameter,
 				}
 				return { fg = mode_color[vim.fn.mode()] }
 			end,
 			padding = { right = 1 },
 		})
 
+		-- Tamanho do arquivo
 		ins_left({
-			-- filesize component
 			"filesize",
 			cond = conditions.buffer_not_empty,
 		})
 
+		-- Nome do arquivo
 		ins_left({
 			"filename",
 			cond = conditions.buffer_not_empty,
-			color = { fg = colors.magenta, gui = "bold" },
+			color = { fg = colors.func, gui = "bold" },
 		})
 
 		ins_left({ "location" })
-
 		ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
+		-- Diagnósticos LSP
 		ins_left({
 			"diagnostics",
 			sources = { "nvim_diagnostic" },
 			symbols = { error = " ", warn = " ", info = " " },
 			diagnostics_color = {
-				error = { fg = colors.red },
-				warn = { fg = colors.yellow },
-				info = { fg = colors.cyan },
+				error = { fg = colors.error },
+				warn = { fg = colors.warning },
+				info = { fg = colors.hint },
 			},
 		})
 
-		-- Insert mid section. You can make any number of sections in neovim :)
-		-- for lualine it's any number greater then 2
+		-- Centralizador
 		ins_left({
 			function()
 				return "%="
 			end,
 		})
 
+		-- Nome do LSP ativo
 		ins_left({
-			-- Lsp server name .
 			function()
 				local msg = "No Active Lsp"
 				local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
@@ -195,51 +157,44 @@ return {
 				return msg
 			end,
 			icon = " LSP:",
-			color = { fg = "#ffffff", gui = "bold" },
+			color = { fg = colors.fg, gui = "bold" },
 		})
 
-		-- Add components to right sections
+		-- Encoding
 		ins_right({
-			"o:encoding", -- option component same as &encoding in viml
-			fmt = string.upper, -- I'm not sure why it's upper case either ;)
+			"o:encoding",
+			fmt = string.upper,
 			cond = conditions.hide_in_width,
-			color = { fg = colors.green, gui = "bold" },
+			color = { fg = colors.plus, gui = "bold" },
 		})
 
+		-- Formato do arquivo
 		ins_right({
 			"fileformat",
 			fmt = string.upper,
-			icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-			color = { fg = colors.green, gui = "bold" },
+			icons_enabled = false,
+			color = { fg = colors.plus, gui = "bold" },
 		})
 
+		-- Branch Git
 		ins_right({
 			"branch",
 			icon = "",
-			color = { fg = colors.violet, gui = "bold" },
+			color = { fg = colors.operator, gui = "bold" },
 		})
 
+		-- Diff Git
 		ins_right({
 			"diff",
-			-- Is it me or the symbol for modified us really weird
 			symbols = { added = " ", modified = "󰝤 ", removed = " " },
 			diff_color = {
-				added = { fg = colors.green },
-				modified = { fg = colors.orange },
-				removed = { fg = colors.red },
+				added = { fg = colors.plus },
+				modified = { fg = colors.warning },
+				removed = { fg = colors.error },
 			},
 			cond = conditions.hide_in_width,
 		})
 
-		ins_right({
-			function()
-				return "▊"
-			end,
-			color = { fg = colors.blue },
-			padding = { left = 1 },
-		})
-
-		-- Now don't forget to initialize lualine
 		lualine.setup(config)
 	end,
 }
