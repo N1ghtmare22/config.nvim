@@ -7,6 +7,7 @@ vim.o.cmdheight = 0
 
 vim.o.mouse = "a"
 
+-- tab options
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -25,5 +26,12 @@ vim.cursorline = true
 vim.opt.termguicolors = true
 vim.o.guicursor = "i-ci-sm:block"
 
+-- disable if you're on linux/macos
 vim.o.shell = "pwsh"
+
 vim.o.shellcmdflag = "-NoLogo"
+
+-- sync the system clipboard with neovim
+vim.schedule(function()
+	vim.o.clipboard = "unnamedplus"
+end)
