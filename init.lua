@@ -32,4 +32,6 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
+require("vim._core.ui2").enable({})
+
 vim.cmd.colorscheme("vague")

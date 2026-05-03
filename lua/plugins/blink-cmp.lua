@@ -37,6 +37,7 @@ return {
 			preset = "default",
 			["<Tab>"] = { "select_and_accept", "fallback" },
 		},
+
 		appearance = {
 			nerd_font_variant = "mono",
 		},
@@ -51,7 +52,6 @@ return {
 						{ "kind_icon" },
 						{ "label", "label_description", gap = 1 },
 						{ "kind", gap = 1 },
-						{ "label_description", gap = 1 },
 						{ "source_name", gap = 1 },
 					},
 				},

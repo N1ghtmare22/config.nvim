@@ -13,15 +13,6 @@ map("n", "<C-i>", "<CMD>tabprevious<CR>", { desc = "move to previous tab" })
 -- tabs
 map("n", "<leader>r", "<CMD>tabnew<CR>", { desc = "open a new tab" })
 
--- oil.nvim
-map("n", "-", "<CMD>Oil<CR>", { desc = "open oil explorer" })
-map("n", "<leader>e", function()
-	require("oil").open_float()
-end, { desc = "open floating oil explorer" })
-
 --terminal
 map("t", "<esc><esc>", "<c-\\><c-n>")
 map("n", "<leader>tt", "<CMD>Floaterm<CR>", { desc = "Open floating terminal" })
-
--- remap caps lock to work as esc
-map("n", "<Caps-Lock>", "<esc>")

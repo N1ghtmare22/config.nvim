@@ -20,6 +20,9 @@ vim.o.confirm = true
 vim.o.confirm = true
 vim.o.wrap = false
 
+vim.o.swapfile = false
+vim.o.backup = false
+
 vim.o.showmode = false
 vim.cursorline = true
 
@@ -35,3 +38,9 @@ vim.o.shellcmdflag = "-NoLogo"
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+vim.opt.updatetime = 50

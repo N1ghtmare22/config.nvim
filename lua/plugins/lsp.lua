@@ -112,14 +112,13 @@ return {
 			},
 		})
 
-		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		--local capabilities = require("blink.cmp").get_lsp_capabilities()
 		local servers = {
 			jdtls = {},
 			clangd = {},
 			gopls = {},
 			pyright = {},
 			powershell_es = {},
-			bashls = {},
 
 			lua_ls = {
 				cmd = { "lua-language-server" },
